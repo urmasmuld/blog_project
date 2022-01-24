@@ -6,7 +6,7 @@ export async function openDatabaseConnection() {
     type: 'mysql',
     host: 'localhost',
     port: 3306,
-    username: 'root',
+    username: 'user',
     password: 'Tere12345',
     database: 'blog'
   };
