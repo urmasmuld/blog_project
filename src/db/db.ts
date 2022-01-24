@@ -7,7 +7,7 @@ export async function openDatabaseConnection() {
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'Turveon0',
+    password: 'Tere12345',
     database: 'blog'
   };
 
