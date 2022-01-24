@@ -1,0 +1,29 @@
+{
+  "name": "blog_project",
+  "version": "1.0.0",
+  "description": "blog project for learning typescript",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "",
+    "build":""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urmasmuld/blog_project.git"
+  },
+  "keywords": [
+    "typescript",
+    "nodejs",
+    "typeorm"
+  ],
+  "author": "UM",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/urmasmuld/blog_project/issues"
+  },
+  "homepage": "https://github.com/urmasmuld/blog_project#readme",
+  "dependencies": {
+    "typescript": "^4.5.5"
+  }
+}
