@@ -1,6 +1,6 @@
 import Http from 'http';
 import App from './app';
-import { openDatabaseConnection } from './db/db';
+import { openDatabaseConnection } from './db/database';
 
 // const server = http.createServer((req, res) => {
 //   res.statusCode = 200;
