@@ -2,7 +2,7 @@
 import { v4 as uuidV4 } from 'uuid';
 import express, { Request, Response } from 'express';
 // import { getConnection } from 'typeorm';
-import User from '../../entities/user';
+import User from '../../entities/User';
 const router = express.Router();
 
 interface UserInput {
@@ -39,16 +39,17 @@ router.post('/', async (req: Request, res: Response) => {
       throw new Error();
     }
 
-    return res.send(newUser);
+    return res.json(newUser);
   } catch (error) {
     if (error instanceof Error) {
-      return res.send({
+      console.log({ error: error.message });
+      return res.json({
         error: 'Unable to create new user',
         message: error.message
       });
     }
 
-    return res.send({
+    return res.json({
       error: 'Unable to create new user',
       message: 'unknown error'
     });
