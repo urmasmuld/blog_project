@@ -1,4 +1,4 @@
-import { createConnection, ConnectionOptions } from 'typeorm';
+import { createConnection } from 'typeorm';
 import path from 'path';
 import config from '../config/config.json';
 import bunyan from 'bunyan';
@@ -8,7 +8,7 @@ const stream = new Stream();
 
 const logger = bunyan.createLogger({
   name: "database",
-  Serializers:  bunyan.stdSerializers,
+  serializers: bunyan.stdSerializers,
   stream: process.stdout
 });
 
