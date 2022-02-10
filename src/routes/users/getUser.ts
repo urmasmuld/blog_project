@@ -3,26 +3,19 @@ import User from '../../entities/User';
 const router = express.Router();
 
 // Find user by ID
-router.get('/', async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   try {
+    const { id } = req.params;
 
-    const { skip, take } = req.query;
-    console.log({
-      skip: Number.parseInt(skip as string), 
-      take: Number.parseInt(take as string)
-    });
-    const users = await User.find({
-      take: Number.isSafeInteger(take) ? Number.parseInt(skip as string): 20,
-      skip: Number.isSafeInteger(skip) ? Number.parseInt(skip as string): 0
-    });
+    const user = await User.findOne({ id: id });
 
-    if (!users) {
+    if (!user) {
       return res.json({
         message: 'no user found with given ID'
       });
     }
 
-    return res.json({users: users});
+    return res.json(user.userInfo());
   } catch (error) {
     if (error instanceof Error) {
       return res.json({

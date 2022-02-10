@@ -4,6 +4,11 @@ import express, { Request, Response } from 'express';
 // import { getConnection } from 'typeorm';
 import User from '../../entities/User';
 const router = express.Router();
+import bunyan from 'bunyan';
+const log = bunyan.createLogger({
+  name: __filename,
+  stream: process.stdout
+});
 
 interface UserInput {
   firstName: string;
@@ -39,10 +44,12 @@ router.post('/', async (req: Request, res: Response) => {
       throw new Error();
     }
 
+    log.info({ user: newUser }, 'New user was created');
     return res.json(newUser);
   } catch (error) {
+    log.error({ error: error, input: req.body }, 'Unable to create User');
     if (error instanceof Error) {
-      console.log({ error: error.message });
+      // console.log({ error: error.message });
       return res.json({
         error: 'Unable to create new user',
         message: error.message

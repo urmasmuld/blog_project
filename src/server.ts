@@ -1,6 +1,7 @@
 import Http from 'http';
 import App from './app';
 import { openDatabaseConnection } from './db/database';
+import logger from 'bunyan';
 
 // const server = http.createServer((req, res) => {
 //   res.statusCode = 200;
