@@ -12,8 +12,8 @@ import logger from 'bunyan';
 const startServer = async () => {
   const httpServer = Http.createServer(App);
   await openDatabaseConnection();
-  httpServer.listen(3001, () => {
-    console.log('Server started on http://localhost:3001');
+  httpServer.listen(3000, () => {
+    console.log('Server started on http://localhost:3000');
   });
 };
 startServer();

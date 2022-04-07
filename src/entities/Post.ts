@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import Category from './Category';
 import User from './User';
+import Comment from './Comment';
 
 @Entity()
 export default class Post extends BaseEntity {
@@ -36,6 +37,9 @@ export default class Post extends BaseEntity {
   createdAt!: Date;
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @OneToMany(() => Comment, (comment) => comment.postId)
+  comments: Comment[];
 
   @ManyToOne(() => User, (user) => user.posts, {
     createForeignKeyConstraints: true
