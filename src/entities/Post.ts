@@ -9,12 +9,28 @@ import {
   Entity,
   ManyToMany,
   OneToMany,
-  JoinTable
+  JoinTable,
+  DeleteDateColumn
 } from 'typeorm';
 import Category from './Category';
 import User from './User';
 import Comment from './Comment';
 import Tag from './Tag';
+
+type PostInfo = {
+  id: string,
+  title: string,
+  metaTitle: string,
+  summary: string,
+  published: string,
+  content: string,
+  authorId: string,
+  parentId: string,
+
+  createdAt: Date,
+  updatedAt: Date,
+}
+
 
 @Entity()
 export default class Post extends BaseEntity {
@@ -34,7 +50,11 @@ export default class Post extends BaseEntity {
   published!: boolean;
   @Column('text')
   content!: string;
-  @CreateDateColumn()
+
+  @DeleteDateColumn()
+  deletedAt: boolean;
+
+@CreateDateColumn()
   createdAt!: Date;
   @UpdateDateColumn()
   updatedAt!: Date;
@@ -60,4 +80,32 @@ export default class Post extends BaseEntity {
   @ManyToMany(()=> Tag)
   @JoinTable()
   tags!: Tag[];
+
+  PostInfo(){
+    // id: string,
+    // title: string,
+    // metaTitle: string,
+    // summary: string,
+    // published: string,
+    // content: string,
+    // authorId: string,
+    // parentId: string,
+  
+    // createdAt: Date,
+    // updatedAt: Date,
+  
+    return{
+      id: this.id,
+      title: this.title,
+      metaTitle: this.metaTitle ?? '',
+      summary: this.summary,
+      published: this.published,
+      content: this.content,
+      comments: this.comments,
+      authorId: this.authorId,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    }
+  }
+
 }

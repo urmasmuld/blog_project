@@ -25,6 +25,7 @@ router.get('/', async (req: Request, res: Response) => {
         // }
         const categories = await categoriesQuery.getMany();
 
+        // console.log(categories);
         return res.json(({categories: categories}));
 
     }catch(error) {

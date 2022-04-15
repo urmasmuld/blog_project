@@ -1,31 +1,32 @@
 import express, { Request, Response } from 'express';
-import Post from '../../entities/Post';
+import Tag from '../../entities/Tag';
+import { v4 as uuidV4 } from 'uuid';
 const router = express.Router();
 
-// Find post by ID
+// Find Tag by ID
 router.get('/:id', async (req: Request, res: Response)=> {
     try{
         const { id } = req.params;
 
-        const post = await Post.findOne({ id: id });
+        const tag = await Tag.findOne({ id: id });
 
-        if(!post){
+        if(!tag){
             return res.json({
-                message: 'no post found with given ID'
+                message: 'no tag found with given ID'
             })
         }
 
-        return res.json(post);
+        return res.json(tag);
     }catch(error){
         if (error instanceof Error) {
             return res.json({
-              error: 'Unable to find post',
+              error: 'Unable to find tag',
               message: error.message
             });
           }
           // unknown (typeorm error?)
           return res.json({
-            error: 'Unable to create new post',
+            error: 'Unable to create new tag',
             message: 'unknown error'
           });
     }

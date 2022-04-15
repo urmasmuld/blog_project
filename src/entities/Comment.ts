@@ -9,13 +9,26 @@ import {
     Entity,
     // ManyToMany,
     OneToMany,
-    JoinTable
+    DeleteDateColumn
   } from 'typeorm';
   // import Category from './Category';
   import Post from './Post';
   // import User from './User';
   
-  @Entity()
+  type CommentInfo = {
+    id: string,
+    postId: string,
+    parentId: string,
+    title: string,
+    published: string,
+    content: string,
+  
+    createdAt: Date,
+    publishedAt: Date,
+  }
+  
+  
+    @Entity()
   export default class Comment extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
@@ -27,6 +40,11 @@ import {
     title!: string;
     @Column('boolean', { default: false })
     published!: boolean;
+
+    @DeleteDateColumn()
+    deletedAt: boolean;
+  
+
     @CreateDateColumn()
     createdAt!: Date;
     @CreateDateColumn()
@@ -44,5 +62,19 @@ import {
       createForeignKeyConstraints: true
     })
     parentComment?: Promise<Post>;
+
+    CommentInfo(){
+  
+      return{
+        id: this.id,
+        postId: this.postId,
+        parentId: this.parentId ?? '',
+        title: this.title ?? '',
+        published: this.published,
+        content: this.content ?? '',
+        createdAt: this.createdAt,
+        publishedAt: this.publishedAt,
+      }
+    }    
 
     }
