@@ -1,70 +1,66 @@
 import express, { Request, Response } from 'express';
-import Post from '../../entities/Post';
-import Comment from '../../entities/Comment';
+import Tag from '../../entities/Tag';
 import { v4 as uuidV4 } from 'uuid';
-import User from '../../entities/User';
 // import { json } from 'process';
 const router = express.Router();
 
-interface CommentInput {
-    postId: string;
-    parentId: string;
+interface TagInput {
+    id: string;
     title: string;
-    // summary: string;
+    metaTitle: string;
     content: string;
 }
 
 router.post('/', async (req: Request, res: Response)=> {
     try{
-        const { postId, parentId, title, content } = req.body as CommentInput;
+        const { id, title, metaTitle, content } = req.body as TagInput;
 
         // validation näide
-        if(!postId || !title || !content){
+        if(!id || !title || !metaTitle || !content){
             return res.json({ error: 'all fields must be filled'});
         }
         // TODO: valideeri sijsonid (sanitize ja validate)
     
-        const post = await Post.findOne({ id: postId });
-        console.log(postId);
-        if(!post){
-            return res.json({ message:"No such post found" });
-        }
+        // const post = await Post.findOne({ id: postId });
+        // console.log(postId);
+        // if(!post){
+        //     return res.json({ message:"No such post found" });
+        // }
     
-        const comment = Comment.create({
+        const tag = Tag.create({
             id: uuidV4(),
-            postId: postId,
-            parentId: parentId,
+            // authorId: authorId,
             title: title,
-            // metaTitle: title.replace(/\s/g, '-'),
+            metaTitle: title.replace(/\s/g, '-'),
             // metaTitle: title.split(/(\s+)/).join('-'),
             // summary: summary,
             content: content,
-            published: false
+            // published: false
         });
     
-        console.log(comment);
-        const newComment = await comment.save();
-        if(!newComment) {
+        console.log(tag);
+        const newTag = await tag.save();
+        if(!newTag) {
             // TODO: parem logger vahevara kasutusele võtta
-            console.log({error: "unable to save comment"});
+            console.log({error: "unable to save tag"});
             // TODO: error handling vahevara luua (ühtlustada errori kuvamine)
             return res.json({
-                error: 'Unable to create new comment',
+                error: 'Unable to create new tag',
                 message: 'typeorm save'
             });
         }
     
-        return res.json(newComment);
+        return res.json(newTag);
     }catch(error){
         console.log('Unknown database error');
         if(error instanceof Error){
             return res.json({
-                error: 'Unable to create new comment',
+                error: 'Unable to create new tag',
                 message: error.message
             });
         }
         return res.json({
-            error: 'Unable to create new comment',
+            error: 'Unable to create new tag',
             message: 'Unknown error'
         });
 }

@@ -11,6 +11,8 @@ import createComment from './comments/createComment';
 import getComments from './comments/getComments';
 import createCategory from './categories/createCategory';
 import getCategories from './categories/getCategories';
+import createTag from './tags/createTag';
+import getTags from './tags/getTags';
 
 const router = express.Router();
 // var userRoutes: string[] = [];
@@ -26,5 +28,6 @@ router.use('/users', [createUser, getUser, getUsers, deleteUser]);
 router.use('/posts', [createPost, getPost, getPosts]);
 router.use('/comments', [createComment, getComments]);
 router.use('/categories', [createCategory, getCategories]);
+router.use('/tags', [createTag, getTags]);
 
 export default router;

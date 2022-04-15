@@ -8,7 +8,7 @@ import {
     // UpdateDateColumn,
     Entity,
     // ManyToMany,
-    // OneToMany,
+    OneToMany,
     JoinTable
   } from 'typeorm';
   // import Category from './Category';
@@ -16,7 +16,7 @@ import {
   // import User from './User';
   
   @Entity()
-  export default class Post_Comment extends BaseEntity {
+  export default class Comment extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
     @Column()
@@ -33,19 +33,16 @@ import {
     publishedAt!: Date;
     @Column('text')
     content!: string;
-  
+    
     @ManyToOne(() => Post, (post) => post.comments, {
       createForeignKeyConstraints: true
     })
     post!: Promise<Post>;
   
-    //   // Parent post
-    //   @OneToMany(() => Comment, (comment) => comment.parentId, {
-    //     createForeignKeyConstraints: true
-    //   })
-    //   parentComment?: Promise<Post>;
-    
-    //   @ManyToMany(()=> Category)
-    //   @JoinTable()
-    //   categories!: Category[];
+    // Parent comment
+    @OneToMany(() => Comment, (comment) => comment.parentId, {
+      createForeignKeyConstraints: true
+    })
+    parentComment?: Promise<Post>;
+
     }

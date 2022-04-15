@@ -14,6 +14,7 @@ import {
 import Category from './Category';
 import User from './User';
 import Comment from './Comment';
+import Tag from './Tag';
 
 @Entity()
 export default class Post extends BaseEntity {
@@ -55,4 +56,8 @@ export default class Post extends BaseEntity {
   @ManyToMany(()=> Category)
   @JoinTable()
   categories!: Category[];
+  
+  @ManyToMany(()=> Tag)
+  @JoinTable()
+  tags!: Tag[];
 }
