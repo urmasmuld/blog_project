@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const endpoint = 'http://localhost:3000/users';
 
-describe('users', () => {
+describe('Get users', () => {
   beforeAll(() => {
     // käivitatakse enne testi paki algust (nt. tee test andmebaasi ja täida see)
   });

@@ -6,10 +6,10 @@ describe('delete user by ID', () => {
   beforeAll(() => {
     // käivitatakse enne testi paki algust (nt. tee test andmebaasi ja täida see)
   });
-  it('should delete comment by ID', async () => {
+  it('should delete user by ID', async () => {
 
         const deleteData = {
-          userId: 'f6ddd954-89d6-406b-ac14-243239cbcb16'
+          userId: 'b1a7f62f-cece-49cd-8964-4b46fe0ee6f7'
         };
         const response = await axios.delete(endpoint, { data: deleteData }, {
             headers: {
@@ -19,7 +19,7 @@ describe('delete user by ID', () => {
         const data = response.data;
     // console.log(data);
     expect(response?.data).toHaveProperty('id');
-    expect(response?.data?.id).toEqual('f6ddd954-89d6-406b-ac14-243239cbcb16');
+    expect(response?.data?.id).toEqual('b1a7f62f-cece-49cd-8964-4b46fe0ee6f7');
   });
 
   it('Should return error for non existing ID', async () => {

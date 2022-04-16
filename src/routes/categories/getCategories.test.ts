@@ -10,8 +10,7 @@ describe('categories', () => {
   it('Should return categories', async () => {
     const response = await axios.get(endpoint);
     // const data = response.data;
-    const data = JSON.parse(JSON.stringify([response.data]));
-    const data2 = JSON.parse(JSON.stringify(data[0].categories));
+    const data = JSON.parse(JSON.stringify(JSON.parse(JSON.stringify([response.data]))[0].categories));
     // console.log(data[0].title);
     expect(data[0].title).not.toBe(''); 
     return;

@@ -25,7 +25,7 @@ describe('create user', ()=>{
         return;
     });
 
-    it('Should return error for non existing ID', async () => {
+    it('Should return error for incomplete input data', async () => {
         const testData = {
             email: "tuha.juhan@email.ee"
         };

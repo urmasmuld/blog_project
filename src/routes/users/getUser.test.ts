@@ -18,7 +18,7 @@ describe('get user by ID', () => {
   it('Should return error for non existing ID', async () => {
     const response = await axios.get(endpoint + '/nonExististentID');
     const data = response.data;
-    console.log(data);
+    // console.log(data);
     expect(data).toHaveProperty('message');
     expect(data?.message).toEqual('no user found with given ID');
     return;

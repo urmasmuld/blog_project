@@ -1,19 +1,14 @@
 import {
     BaseEntity,
     PrimaryGeneratedColumn,
-    // JoinColumn,
     ManyToOne,
     Column,
     CreateDateColumn,
-    // UpdateDateColumn,
     Entity,
-    // ManyToMany,
     OneToMany,
     DeleteDateColumn
   } from 'typeorm';
-  // import Category from './Category';
   import Post from './Post';
-  // import User from './User';
   
   type CommentInfo = {
     id: string,

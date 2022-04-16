@@ -8,7 +8,7 @@ describe('get category by ID', () => {
   });
   it('should return category by ID', async () => {
     const response = await axios.get(
-      endpoint + '/301663e7-5a94-436c-a50f-48940641810d'
+      endpoint + '/a08f8f3d-223b-4d62-bd1e-5fd3a3044868'
     );
     expect(response?.data).toHaveProperty('id');
     expect(response?.data?.title).toEqual('my new category');
