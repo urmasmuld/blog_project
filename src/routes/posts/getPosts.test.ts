@@ -3,17 +3,20 @@ import axios from 'axios';
 const endpoint = 'http://localhost:3000/posts';
 
 describe('posts', () => {
+  let usrId: string;
+  usrId = '089ddda5-f4c8-4bca-974a-e69d616e504a';
+
   beforeAll(() => {
     // käivitatakse enne testi paki algust (nt. tee test andmebaasi ja täida see)
   });
   // käivita testid
   it('Should return posts', async () => {
     const response = await axios.get(
-      endpoint + '?userId=418ac432-7e16-480d-be4e-d181586fc34d'
+      endpoint + '?userId=' + usrId
     );
 
     const data = JSON.parse(JSON.stringify(JSON.parse(JSON.stringify([response.data]))[0].posts));
-    expect(data[0].authorId).toBe('418ac432-7e16-480d-be4e-d181586fc34d'); 
+    expect(data[0].authorId).toBe(usrId); 
     return;
   });
 

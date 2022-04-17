@@ -1,0 +1,16 @@
+{
+    "type": "node",
+    "name": "vscode-jest-tests",
+    "request": "launch",
+    "console": "integratedTerminal",
+    "internalConsoleOptions": "neverOpen",
+    "disableOptimisticBPs": true,
+    "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+    "testSequencer": "../src/routes/testSequencer.ts",
+    // ^^ modified line ^^
+    "cwd": "${workspaceFolder}",
+    "args": [
+      "--runInBand",
+      "--watchAll=false"
+    ]
+  }

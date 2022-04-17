@@ -3,12 +3,14 @@ import axios from 'axios';
 const endpoint = 'http://localhost:3000/comments/';
 
 describe('get comment by ID', () => {
+  let comId: string;
+  comId = '5be92e79-106d-4181-bb34-2e36646afdb9'
   beforeAll(() => {
     // käivitatakse enne testi paki algust (nt. tee test andmebaasi ja täida see)
   });
   it('should return comment by ID', async () => {
     const response = await axios.get(
-      endpoint + '/5be92e79-106d-4181-bb34-2e36646afdb9'
+      endpoint + comId
     );
     // console.log(response.data);
     expect(response?.data).toHaveProperty('id');

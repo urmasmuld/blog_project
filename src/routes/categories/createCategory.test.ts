@@ -5,9 +5,9 @@ const endpoint = 'http://localhost:3000/categories/';
 describe('create a category', ()=>{
     it('it should successfully create a new category', async ()=>{
         const testData = {
-                title: "my new category",
-                metaTitle: "my-new-category",
-                content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            title: "my very new category",
+            metaTitle: "my-very-new-category",
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         };
 
         const response = await axios.post(endpoint, testData, {
@@ -27,8 +27,8 @@ describe('create a category', ()=>{
     it('Should return error for non existing ID', async () => {
         const testData = {
             postId: "nonExististentID",
-                metaTitle: "my-new-category",
-                content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            metaTitle: "my-new-category",
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         };
 
         const response = await axios.post(endpoint, testData, {

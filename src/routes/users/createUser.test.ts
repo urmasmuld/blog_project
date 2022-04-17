@@ -6,7 +6,6 @@ describe('create user', ()=>{
     it('it should successfully create a new user', async ()=>{
         const testData = {
             firstName: "Juhan",
-            middleName: "",
             lastName: "Tuha",
             mobile: "+3725225556",
             email: "tuha.juhan@email.ee"
@@ -19,7 +18,7 @@ describe('create user', ()=>{
         });
 
         const responseData = response.data;
-
+        // console.log(responseData);
         expect(responseData.firstName).toEqual(testData.firstName);
         expect(responseData.email).toEqual(testData.email);
         return;

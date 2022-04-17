@@ -1,45 +1,65 @@
 import express, { Request, Response } from 'express';
 import Tag from '../../entities/Tag';
+import { v4 as uuidV4 } from 'uuid';
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response) => {
-    try{
-        const { skip, take } = req.query;
+interface TagInput {
+  title: string;
+  metaTitle: string;
+  slug: string;
+  content: string;
+}
 
-        // const posts = await Post.find({
-        //     take: Number.isSafeInteger(take) ? Number.parseInt(skip as string): 20,
-        //     skip: Number.isSafeInteger(skip) ? Number.parseInt(skip as string): 0,
-        //     order: {
-        //         createdAt: 'DESC'
-        //     }
-        // });
-        // console.log(...posts);
-        
-        const tagsQuery = Tag.createQueryBuilder('tag')
-        // .innerJoinAndSelect('category.author','author')
-        .limit(Number.isSafeInteger(take) ? Number.parseInt(skip as string): 20)
-        .offset(Number.isSafeInteger(skip) ? Number.parseInt(skip as string): 0);
+router.post('/', async (req: Request, res: Response) => {
+  try {
+    const { title, slug, content } = req.body as TagInput;
+    //console.log('request', req.body);
 
-        // if(postId != undefined) {
-        //   postsQuery.where('author.id = :postId', { userId: userId });
-        // }
-        const tags = await tagsQuery.getMany();
-
-        return res.json(({tags: tags}));
-
-    }catch(error) {
-        if (error instanceof Error) {
-            return res.json({
-              error: 'Unable to find tags',
-              message: error.message
-            });
-          }
-          // unknown (typeorm error?)
-          return res.json({
-            error: 'Unable to find tags',
-            message: 'unknown error'
-          });
+    // validation näide
+    if (!title || !slug || !content) {
+      //if (!authorId) {
+      return res.json({ error: 'all fields must be filled' });
     }
+    // TODO: valideeri jsonid (nt. sanitize ja validate)
+
+    const titleCheck = await Tag.findOne({ title: title });
+    if (titleCheck) {
+      return res.json({
+        message: 'There is a tag with this title already: ' + titleCheck.title
+      });
+    }
+
+    const tag = Tag.create({
+      id: uuidV4(),
+      title: title,
+      metaTitle: title.replace(/\s/g, '-'),
+      slug: slug,
+      content: content
+    });
+    //console.log(tag);
+    const newTag = await tag.save();
+    if (!newTag) {
+      console.log({ error: 'unable to save tag' });
+      return res.json({
+        error: 'Unable to create new tag',
+        message: 'typeorm save'
+      });
+    }
+
+    return res.json(newTag);
+  } catch (error) {
+    console.log('Unknown databse error');
+    if (error instanceof Error) {
+      return res.json({
+        error: 'Unable to create new tag',
+        message: error.message
+      });
+    }
+    return res.json({
+      error: 'Unable to create new tag',
+      message: 'Unknown error'
+    });
+  }
 });
 
 export default router;

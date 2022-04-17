@@ -6,7 +6,7 @@ describe('create a post', ()=>{
     it('it should successfully create a new post', async ()=>{
         const testData = {
                 authorId: "089ddda5-f4c8-4bca-974a-e69d616e504a",
-                title: "my new post xxx",
+                title: "my very new post xxx",
                 summary: "small summary for nonsense post",
                 content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         };

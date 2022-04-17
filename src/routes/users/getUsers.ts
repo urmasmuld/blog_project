@@ -7,10 +7,10 @@ router.get('/', async (req: Request, res: Response) => {
   try {
 
     const { skip, take } = req.query;
-    console.log({
-      skip: Number.parseInt(skip as string), 
-      take: Number.parseInt(take as string)
-    });
+    // console.log({
+    //   skip: Number.parseInt(skip as string), 
+    //   take: Number.parseInt(take as string)
+    // });
     const users = await User.find({
       take: Number.isSafeInteger(take) ? Number.parseInt(skip as string): 20,
       skip: Number.isSafeInteger(skip) ? Number.parseInt(skip as string): 0

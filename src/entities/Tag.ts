@@ -1,50 +1,31 @@
 import {
-    BaseEntity,
-    PrimaryGeneratedColumn,
-    Column,
-    Entity,
-    ManyToMany,
-    DeleteDateColumn
-  } from 'typeorm';
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  ManyToMany,
+  JoinTable
+} from 'typeorm';
 import Post from './Post';
-
-type TagInfo = {
-  id: string,
-  title: string,
-  metaTitle: string,
-  slug: string,
-  content: string,
-}
 
 @Entity()
 export default class Tag extends BaseEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id!: string;
-    @Column('varchar', { length: 75 })
-    title!: string;
-    @Column('varchar', { length: 100 })
-    metaTitle?: string;
-    @Column('varchar', { length: 100, default: '' })
-    slug?: string;
-    @Column('text')
-    content?: string;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
-    @DeleteDateColumn()
-    deletedAt: boolean;
-  
-    @ManyToMany(()=> Post)
-    posts: Post;
+  @Column('varchar', { length: 75 })
+  title: string;
 
-    TagInfo(){
+  @Column('varchar', { length: 100 })
+  metaTitle: string;
 
-      return{
-        id: this.id,
-        title: this.title,
-        metaTitle: this.metaTitle ?? '',
-        slug: this.slug ?? '',
-        content: this.content ?? '',
-        posts: this.posts,
-      }
-    }
-      
+  @Column('varchar', { length: 100 })
+  slug: string;
+
+  @Column('text')
+  content: string;
+
+  @ManyToMany(() => Post)
+  @JoinTable()
+  categories: Post[];
 }
